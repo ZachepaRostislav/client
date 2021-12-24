@@ -18,9 +18,9 @@ const App: React.FC = () => {
 
     async function getUsers() {
         try {
-          const response = await UserService.fetchUsers();
-          console.log(response.data)
-          setUsers(response.data)
+            const response = await UserService.fetchUsers();
+            console.log(response.data)
+            setUsers(response.data)
         } catch (error) {
             console.log(error)
         }
@@ -28,10 +28,10 @@ const App: React.FC = () => {
 
     if (!store.isAuth) {
         return (
-          <>
-          <LoginForm />
-          <button onClick={getUsers}>Get users</button>
-          </>
+            <>
+                <LoginForm />
+                <button onClick={getUsers}>Get users</button>
+            </>
         )
     }
 
@@ -40,25 +40,25 @@ const App: React.FC = () => {
     }
 
     return (
-        <>
+        <div>
             <h1>
                 {store.isAuth
                     ? `User Authorized ${store.user.email}`
                     : `LOG IN`}
             </h1>
             <h2>
-              {store.user.isActivated? 'Account confirmed by email':'Confirm your account'}
+                {store.user.isActivated ? 'Account confirmed by email' : 'Confirm your account'}
             </h2>
             <button onClick={() => store.logout()}>Exit</button>
-             
-                <button onClick={getUsers}>Get users</button>
-             
-           
-           {console.log(users.map(user=>{
-              <div key={user.email}>{user.email}</div>
-            }))}
-            
-        </>
+
+            <button onClick={getUsers}>Get users</button>
+
+
+            {users.map(user => {
+                return <div key={user.email}>{user.email}</div>
+            })}
+
+        </div>
     )
 }
 export default observer(App)
